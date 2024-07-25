@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PERSONAL INFORMATION</title>
+  <style>
+    h1, h2 {
+      font-family: Algerian, sans-serif;
+      color: black;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("https://thumbs.dreamstime.com/b/wonderful-magnolia-blossom-sun-light-springtime-nature-background-floral-border-pastel-color-soft-focus-90654508.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    form {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #000;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      display: none;
+    }
+
+    form:hover {
+      border-color: #df3759;
+      box-shadow: 0 0 15px rgba(19, 176, 212, 0.955);
+      background-color: rgba(0, 123, 255, 0.1);
+      transform: scale(1.02);
+    }
+
+    form.show {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #070707;
+    }
+
+    input[type="text"], input[type="date"], input[type="tel"] {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #000;
+      border-radius: 5px;
+      background-color: transparent;
+      color: #000;
+    }
+
+    input[type="text"]:focus, input[type="date"]:focus, input[type="tel"]:focus,
+    input[type="text"]:active, input[type="date"]:active, input[type="tel"]:active {
+      background-color: transparent;
+      color: #000;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #000;
+    }
+
+    button {
+      display: inline-block;
+      font-family: Algerian, sans-serif;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ea326f;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #824ddc;
+      transform: scale(1.1);
+    }
+
+    .report-link {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .report-link a {
+      display: inline-block;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #f95398;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .report-link a:hover {
+      background-color: #e1ca1d;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PERSONAL INFORMATION</h1>
+    <form class="insert-form show" action="/insert" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter Name" required>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" placeholder="Enter Email" required>
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required>
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" placeholder="Enter Address" required>
+      <label for="insertPhone">Phone Number:</label>
+      <input type="tel" id="insertPhone" name="phone" placeholder="Enter Phone Number" required>
+      <button type="submit">Insert</button>
+    </form>
+    
+    <form class="update-form" action="/update" method="post">
+      <label for="updateName">Name:</label>
+      <input type="text" id="updateName" name="name" placeholder="Enter Name" required>
+      <label for="updateEmail">Email:</label>
+      <input type="text" id="updateEmail" name="email" placeholder="Enter Email" required>
+      <label for="updateDOB">Date of Birth:</label>
+      <input type="date" id="updateDOB" name="dob" required>
+      <label for="updateAddress">Address:</label>
+      <input type="text" id="updateAddress" name="address" placeholder="Enter Address" required>
+      <label for="updatePhone">Phone Number:</label>
+      <input type="tel" id="updatePhone" name="phone" placeholder="Enter Phone Number" required>
+      <button type="submit">Update</button>
+    </form>
+    
+    <form class="find-form" action="/find" method="post">
+      <label for="findname">NAME:</label>
+      <input type="text" id="findname" name="name" placeholder="Enter Name" required>
+      <button type="submit">Find</button>
+    </form>
+    
+    <form class="delete-form" action="/delete" method="post">
+      <label for="deleteName">Name:</label>
+      <input type="text" id="deleteName" name="name" placeholder="Enter Name" required>
+      <button type="submit">Delete</button>
+    </form>
+    
+    <button id="insertButton">INSERT</button>
+    <h2>DO YOU WANT TO UPDATE YOUR INFORMATION?</h2>
+    <button id="updateButton">UPDATE</button>
+    <h2>DO YOU WANT TO DELETE YOUR INFORMATION?</h2>
+    <button id="deleteButton">DELETE</button>
+    <h2>DO YOU WANT TO FIND?</h2>
+    <button id="findButton">FIND</button>
+    
+    <div class="report-link">
+      <h2>Generate Report</h2>
+      <a href="/report" style="font-family: Algerian;">Generate Report</a>
+    </div>
+  </div>
+
+  <script>
+    function showForm(formClass) {
+      const forms = document.querySelectorAll('form');
+      forms.forEach(form => {
+        form.classList.remove('show');
+      });
+      document.querySelector(formClass).classList.add('show');
+    }
+
+    document.getElementById('insertButton').addEventListener('click', () => showForm('.insert-form'));
+    document.getElementById('updateButton').addEventListener('click', () => showForm('.update-form'));
+    document.getElementById('deleteButton').addEventListener('click', () => showForm('.delete-form'));
+    document.getElementById('findButton').addEventListener('click', () => showForm('.find-form'));
+  </script>
+</body>
+</html>
